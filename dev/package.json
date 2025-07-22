@@ -1,0 +1,22 @@
+{
+  "name": "test-ds",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Elumion/test-ds.git"
+  },
+  "author": "Elumion",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Elumion/test-ds/issues"
+  },
+  "homepage": "https://github.com/Elumion/test-ds#readme",
+  "devDependencies": {
+    "gulp": "^5.0.1"
+  }
+}
