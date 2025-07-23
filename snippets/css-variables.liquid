@@ -1,0 +1,128 @@
+{% style %}
+  @font-face {
+    font-family: 'IBM Plex Sans';
+    src: url('{{  "IBMPlexSans-VariableFont_wdth_wght.ttf" |  asset_url }}') format('truetype-variations');
+    font-weight: 100 900;
+    font-stretch: 75% 125%;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'IBM Plex Sans';
+    src: url('{{  "IBMPlexSans-VariableFont_wdth_wght.ttf" |  asset_url }}') format('truetype-variations');
+    font-weight: 100 900;
+    font-stretch: 75% 125%;
+    font-style: italic;
+  }
+
+  /* GT America */
+  /* Regular Style */
+  @font-face {
+    font-family: 'GT America Standard';
+    src: url('{{ "GT-America-Standard-Regular-Trial.otf" | asset_url }}') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'GT America Standard';
+    src: url('{{ "GT-America-Standard-Regular-Italic-Trial.otf" | asset_url }}') format('opentype');
+    font-weight: normal;
+    font-style: italic;
+  }
+
+  /* Bold Style */
+  @font-face {
+    font-family: 'GT America Standard';
+    src: url('{{ "GT-America-Standard-Bold-Trial.otf" | asset_url }}') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'GT America Standard';
+    src: url('{{ "GT-America-Standard-Bold-Italic-Trial.otf" | asset_url }}') format('opentype');
+    font-weight: bold;
+    font-style: italic;
+  }
+
+  /* Light Style */
+  @font-face {
+    font-family: 'GT America Standard';
+    src: url('{{ "GT-America-Standard-Light-Trial.otf" | asset_url }}') format('opentype');
+    font-weight: lighter;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'GT America Standard';
+    src: url('{{ "GT-America-Standard-Light-Italic-Trial.otf" | asset_url }}') format('opentype');
+    font-weight: lighter;
+    font-style: italic;
+  }
+
+  /* Medium Style */
+  @font-face {
+    font-family: 'GT America Standard';
+    src: url('{{ "GT-America-Standard-Medium-Trial.otf" | asset_url }}') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'GT America Standard';
+    src: url('{{ "GT-America-Standard-Medium-Italic-Trial.otf" | asset_url }}') format('opentype');
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  /* Thin Style */
+  @font-face {
+    font-family: 'GT America Standard';
+    src: url('{{ "GT-America-Standard-Thin-Trial.otf" | asset_url }}') format('opentype');
+    font-weight: 100;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'GT America Standard';
+    src: url('{{ "GT-America-Standard-Thin-Italic-Trial.otf" | asset_url }}') format('opentype');
+    font-weight: 100;
+    font-style: italic;
+  }
+
+  /* Ultra Light Style */
+  @font-face {
+    font-family: 'GT America Standard';
+    src: url('{{ "GT-America-Standard-Ultra-Light-Trial.otf" | asset_url }}') format('opentype');
+    font-weight: 200;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'GT America Standard';
+    src: url('{{ "GT-America-Standard-Ultra-Light-Italic-Trial.otf" | asset_url }}') format('opentype');
+    font-weight: 200;
+    font-style: italic;
+  }
+
+  /* Black Style */
+  @font-face {
+    font-family: 'GT America Standard';
+    src: url('{{ "GT-America-Standard-Black-Trial.otf" | asset_url }}') format('opentype');
+    font-weight: 900;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'GT America Standard';
+    src: url('{{ "GT-America-Standard-Black-Italic-Trial.otf" | asset_url }}') format('opentype');
+    font-weight: 900;
+    font-style: italic;
+  }
+
+  :root{
+    --font-america: 'GT America Standard', sans-serif;
+    --font-plex: 'IBM Plex Sans', sans-serif;
+  }
+{% endstyle %}
