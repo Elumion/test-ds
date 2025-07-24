@@ -1,11 +1,396 @@
 {{ 'section-slider-pin-points.css' | asset_url | stylesheet_tag }}
 <script src="{{ "section-slider-pin-points.js" |  asset_url }}" defer></script>
 
-<s-slider-pin-points class="s-slider-pin-points"></s-slider-pin-points>
+<s-slider-pin-points class="s-slider-pin-points"> </s-slider-pin-points>
 {% schema %}
 {
   "name": "Slider Pin Points",
-  "settings": [],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Paddings Settings"
+    },
+    {
+      "type": "range",
+      "default": 60,
+      "id": "padding_top_desktop",
+      "label": "Padding Top Desktop",
+      "max": 200,
+      "min": 0,
+      "step": 2,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "default": 40,
+      "id": "padding_top_mobile",
+      "label": "Padding Top Mobile",
+      "max": 200,
+      "min": 0,
+      "step": 2,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "default": 60,
+      "id": "padding_bottom_desktop",
+      "label": "Padding Bottom Desktop",
+      "max": 200,
+      "min": 0,
+      "step": 2,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "default": 40,
+      "id": "padding_bottom_mobile",
+      "label": "Padding Bottom Mobile",
+      "max": 200,
+      "min": 0,
+      "step": 2,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Background Settings"
+    },
+    {
+      "type": "color",
+      "default": "#fff",
+      "id": "background_color",
+      "label": "Color"
+    },
+    {
+      "type": "header",
+      "content": "Title Settings"
+    },
+    {
+      "type": "text",
+      "default": "no bullshit inside",
+      "label": "Title",
+      "id": "title"
+    },
+    {
+      "type": "range",
+      "default": 40,
+      "max": 100,
+      "min": 0,
+      "id": "title_font_size_desktop",
+      "label": "Font Size Desktop",
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "default": 28,
+      "max": 100,
+      "min": 0,
+      "id": "title_font_size_mobile",
+      "label": "Font Size Mobile",
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "default": 700,
+      "max": 900,
+      "min": 100,
+      "id": "title_font_weight_desktop",
+      "label": "Font Weight Desktop",
+      "step": 100
+    },
+    {
+      "type": "range",
+      "default": 700,
+      "max": 900,
+      "min": 100,
+      "id": "title_font_weight_mobile",
+      "label": "Font Weight Mobile",
+      "step": 100
+    },
+    {
+      "type": "checkbox",
+      "default": false,
+      "id": "title_is_italic",
+      "label": "Enable Italic Style"
+    },
+    {
+      "type": "checkbox",
+      "default": true,
+      "id": "title_is_uppercase",
+      "label": "Enable Uppercase"
+    },
+    {
+      "type": "text_alignment",
+      "default": "center",
+      "id": "title_align_desktop",
+      "label": "Alignment Desktop"
+    },
+    {
+      "type": "text_alignment",
+      "default": "center",
+      "id": "title_align_mobile",
+      "label": "Alignment mobile"
+    },
+    {
+      "type": "color",
+      "default": "#231F20",
+      "label": "Color",
+      "id": "title_color"
+    },
+    {
+      "type": "header",
+      "content": "Slider Settings"
+    },
+    {
+      "type": "checkbox",
+      "default": false,
+      "id": "slider_reverse_content",
+      "label": "Enable Reverse Content For Desktop Slider"
+    },
+    {
+      "type": "color",
+      "default": "#58656F",
+      "id": "slider_background_color",
+      "label": "Background Color"
+    },
+    {
+      "type": "color",
+      "default": "#0E0C0C",
+      "label": "Arrows Background Color",
+      "id": "slider_arrows_background_color"
+    },
+    {
+      "type": "header",
+      "content": "Slider Clickable Text Styles Settings"
+    },
+    {
+      "type": "range",
+      "default": 40,
+      "max": 100,
+      "min": 0,
+      "id": "click_text_font_size_desktop",
+      "label": "Font Size Desktop",
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "default": 23,
+      "max": 100,
+      "min": 0,
+      "id": "click_text_font_size_mobile",
+      "label": "Font Size Mobile",
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "default": 700,
+      "max": 900,
+      "min": 100,
+      "id": "click_text_font_weight_desktop",
+      "label": "Font Weight Desktop",
+      "step": 100
+    },
+    {
+      "type": "range",
+      "default": 700,
+      "max": 900,
+      "min": 100,
+      "id": "click_text_font_weight_mobile",
+      "label": "Font Weight Mobile",
+      "step": 100
+    },
+    {
+      "type": "checkbox",
+      "default": false,
+      "id": "click_text_is_italic",
+      "label": "Enable Italic Style"
+    },
+    {
+      "type": "checkbox",
+      "default": true,
+      "id": "click_text_is_uppercase",
+      "label": "Enable Uppercase"
+    },
+    {
+      "type": "checkbox",
+      "default": true,
+      "id": "click_text_is_underline_hover",
+      "label": "Enable UnderLine on Hover"
+    },
+    {
+      "type": "checkbox",
+      "default": true,
+      "id": "click_text_is_underline_select",
+      "label": "Enable UnderLine on Select"
+    },
+    {
+      "type": "color",
+      "default": "#FFFFFF66",
+      "label": "Color",
+      "id": "click_text_color",
+      "alpha": true
+    },
+    {
+      "type": "color",
+      "default": "#FFFFFF",
+      "label": "Color Hover",
+      "id": "click_text_color_hover"
+    }
+  ],
+
+  "blocks": [
+    {
+      "type": "slide",
+      "limit": 5,
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Image Settings"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_desktop",
+          "label": "Image Desktop"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Image Mobile"
+        },
+        {
+          "type": "header",
+          "content": "Content Settings"
+        },
+        {
+          "type": "text",
+          "default": "Lorem Ipsum",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "header",
+          "content": "Pin Point Position"
+        },
+        {
+          "type": "range",
+          "default": 50,
+          "id": "pin_position_x_desktop",
+          "label": "X-axis Position Desktop",
+          "max": 100,
+          "min": 0,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "range",
+          "default": 50,
+          "id": "pin_position_y_desktop",
+          "label": "Y-axis Position Desktop",
+          "max": 100,
+          "min": 0,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "range",
+          "default": 50,
+          "id": "pin_position_x_mobile",
+          "label": "X-axis Position Mobile",
+          "max": 100,
+          "min": 0,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "range",
+          "default": 50,
+          "id": "pin_position_y_mobile",
+          "label": "Y-axis Position Mobile",
+          "max": 100,
+          "min": 0,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "header",
+          "content": "Pin Point Content Settings"
+        },
+        {
+          "type": "text",
+          "default": "Lorem Ipsum",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "range",
+          "default": 40,
+          "max": 100,
+          "min": 0,
+          "id": "pin_text_font_size_desktop",
+          "label": "Font Size Desktop",
+          "step": 1,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "default": 23,
+          "max": 100,
+          "min": 0,
+          "id": "pin_text_font_size_mobile",
+          "label": "Font Size Mobile",
+          "step": 1,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "default": 700,
+          "max": 900,
+          "min": 100,
+          "id": "pin_text_font_weight_desktop",
+          "label": "Font Weight Desktop",
+          "step": 100
+        },
+        {
+          "type": "range",
+          "default": 700,
+          "max": 900,
+          "min": 100,
+          "id": "pin_text_font_weight_mobile",
+          "label": "Font Weight Mobile",
+          "step": 100
+        },
+        {
+          "type": "checkbox",
+          "default": false,
+          "id": "pin_text_is_italic",
+          "label": "Enable Italic Style"
+        },
+        {
+          "type": "checkbox",
+          "default": true,
+          "id": "pin_text_is_uppercase",
+          "label": "Enable Uppercase"
+        },
+
+        {
+          "type": "color",
+          "default": "#FFFFFF",
+          "label": "Color",
+          "id": "pin_text_color"
+        },
+        {
+          "type": "color",
+          "default": "#fff",
+          "id": "pin_dot_color",
+          "label": "Pin Dot Color"
+        }
+      ]
+    }
+  ],
   "presets": [
     {
       "name": "Slider Pin Points"
