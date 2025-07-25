@@ -13,10 +13,10 @@
 {%- liquid
   # Calculate maximum display dimensions
   if image.aspect_ratio <= 1
-    assign max_height_image = image.height | at_most: max_height
+    assign max_height_image = image.height
     assign max_width_image = max_height_image | times: image.aspect_ratio
   else
-    assign max_width_image = image.width | at_most: max_width
+    assign max_width_image = image.width
     assign max_height_image = max_width_image | divided_by: image.aspect_ratio
   endif
 
@@ -27,11 +27,11 @@
     for width in image_widths_arr
       assign width_num = width | plus: 0
       if image.width >= width_num
-        echo image | img_url: width: width_num | append: ' ' | append: width_num | append: 'w,'
+        echo image | image_url: width: width_num | append: ' ' | append: width_num | append: 'w,'
       endif
     endfor
     # Always include original image
-    echo image | img_url: width: image.width | append: ' ' | append: image.width | append: 'w'
+    echo image | image_url: width: image.width | append: ' ' | append: image.width | append: 'w'
   endcapture
 -%}
 
@@ -60,3 +60,12 @@
   alt="{{ image.alt | escape }}"
   {{ attributes }}
 >
+<noscript>
+  <img
+    class="{{ image_class }}"
+    src="{{ image | image_url: width: image.width }}"
+    width="{{ image.width }}"
+    height="{{ image.height }}"
+    alt="{{ image.alt | escape }}"
+  >
+</noscript>
