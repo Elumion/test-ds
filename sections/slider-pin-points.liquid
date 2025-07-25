@@ -1,7 +1,142 @@
 {{ 'section-slider-pin-points.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+  #shopify-section-{{ section.id }} .s-slider-pin-points{
+      background-color: {{ section.settings.background_color }};
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  #shopify-section-{{ section.id }} .s-slider-pin-points__slider-btn-prev,
+  #shopify-section-{{ section.id }} .s-slider-pin-points__slider-btn-prev,
+  {
+      background-color: {{ section.settings.slider_arrows_background_color }};
+  }
+
+  #shopify-section-{{ section.id }} .s-slider-pin-points__click-item{
+    color: {{ section.settings.click_text_color }};
+    font-size: {{ section.settings.click_text_font_size_mobile }}px;
+    font-weight: {{ section.settings.click_text_font_weight_mobile }};
+    {% if section.settings.click_text_is_italic %}
+      font-style: italic;
+    {% endif %}
+    {% if section.settings.click_text_is_uppercase %}
+      text-transform: uppercase;
+    {% endif %}
+
+  }
+
+  #shopify-section-{{ section.id }} .s-slider-pin-points__click-item:hover{
+    color: {{ section.settings.click_text_color_hover }};
+    {% if section.settings.click_text_is_underline_hover %}
+      opacity: 1;
+    {% endif %}
+  }
+
+  #shopify-section-{{ section.id }} .s-slider-pin-points__click-item.is-active:before{
+    {% if section.settings.click_text_is_underline_select %}
+      opacity: 1;
+    {% endif %}
+  }
+
+  #shopify-section-{{ section.id }} .s-slider-pin-points__inner-container{
+      background-color: {{ section.settings.background_color }};
+  }
+
+  #shopify-section-{{ section.id }} .s-slider-pin-points__title{
+    color: {{ section.settings.title_color }};
+    font-size: {{ section.settings.title_font_size_mobile }}px;
+    font-weight: {{ section.settings.title_font_weight_mobile }};
+    {% if section.settings.title_is_italic %}
+      font-style: italic;
+    {% endif %}
+    {% if section.settings.title_is_uppercase %}
+      text-transform: uppercase;
+    {% endif %}
+    text-align: {{ section.settings.title_align_mobile }};
+  }
+
+  @media screen and (min-width:768px){
+    #shopify-section-{{ section.id }} .s-slider-pin-points{
+      padding-top: {{ section.settings.padding_top_desktop }}px;
+      padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+    }
+    #shopify-section-{{ section.id }} .s-slider-pin-points__title{
+      font-size: {{ section.settings.title_font_size_desktop }}px;
+      font-weight: {{ section.settings.title_font_weight_desktop }};
+      text-align: {{ section.settings.title_align_desktop }};
+    }
+    #shopify-section-{{ section.id }} .s-slider-pin-points__click-item{
+      font-size: {{ section.settings.click_text_font_size_desktop }}px;
+      font-weight: {{ section.settings.click_text_font_weight_desktop }};
+    }
+    #shopify-section-{{ section.id }} .s-slider-pin-points__inner-container{
+    {% if section.settings.slider_reverse_content %}
+      grid-template-areas: "slider text";
+    {% else %}
+      grid-template-areas: "text slider";
+    {% endif %}
+    }
+  }
+{% endstyle %}
+
 <script src="{{ "section-slider-pin-points.js" |  asset_url }}" defer></script>
 
-<s-slider-pin-points class="s-slider-pin-points"> </s-slider-pin-points>
+<s-slider-pin-points class="s-slider-pin-points">
+  {% if section.settings.title != blank %}
+    <h3 class="s-slider-pin-points__title">
+      {{ section.settings.title }}
+    </h3>
+  {% endif %}
+  {% if section.blocks.size > 0 %}
+    <div class="s-slider-pin-points__inner-container">
+      <swiper-container
+        class="s-slider-pin-points__slider"
+        {% comment %}
+          add loop and autoplay settings
+        {% endcomment %}
+      >
+        <div slot="container-start">
+          <button class="s-slider-pin-points__slider-btn-prev js-slider-pin-points__slider-btn-prev">
+            {% render 'icon-arrow-left' %}
+          </button>
+          <button class="s-slider-pin-points__slider-btn-next js-slider-pin-points__slider-btn-next">
+            {% render 'icon-arrow-right' %}
+          </button>
+        </div>
+        {% for block in section.blocks %}
+          <swiper-slide class="s-slider-pin-points__slide-item">
+            {% if block.settings.image_desktop != blank %}
+              {% render 'image',
+                image: block.settings.image_desktop,
+                class: 's-slider-pin-points__slide-image s-slider-pin-points__slide-image--desktop'
+              %}
+            {% endif %}
+            {% if block.settings.image_mobile != blank %}
+              {% render 'image',
+                image: block.settings.image_mobile,
+                class: 's-slider-pin-points__slide-image s-slider-pin-points__slide-image--mobile'
+              %}
+            {% endif %}
+            {% if block.settings.text != blank %}
+              <div class="s-slider-pin-points__point-container">
+                <span class="s-slider-pin-points__point-dot"></span>
+                <span class="s-slider-pin-points__point-text">{{ block.settings.text }}</span>
+              </div>
+            {% endif %}
+          </swiper-slide>
+        {% endfor %}
+      </swiper-container>
+      <div class="s-slider-pin-points__clicks-container">
+        {% for block in section.blocks %}
+          <button class="s-slider-pin-points__click-item">
+            {{ block.settings.title }}
+          </button>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+</s-slider-pin-points>
 {% schema %}
 {
   "name": "Slider Pin Points",
