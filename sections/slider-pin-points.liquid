@@ -1,16 +1,25 @@
 {{ 'section-slider-pin-points.css' | asset_url | stylesheet_tag }}
 
 {% style %}
+  #shopify-section-{{ section.id }}{
+    background-color: {{ section.settings.background_color }};
+
+  }
   #shopify-section-{{ section.id }} .s-slider-pin-points{
-      background-color: {{ section.settings.background_color }};
       padding-top: {{ section.settings.padding_top_mobile }}px;
       padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
   }
 
   #shopify-section-{{ section.id }} .s-slider-pin-points__slider-btn-prev,
-  #shopify-section-{{ section.id }} .s-slider-pin-points__slider-btn-prev,
+  #shopify-section-{{ section.id }} .s-slider-pin-points__slider-btn-next
   {
       background-color: {{ section.settings.slider_arrows_background_color }};
+  }
+
+  #shopify-section-{{ section.id }} .s-slider-pin-points__slider-btn-prev:hover,
+  #shopify-section-{{ section.id }} .s-slider-pin-points__slider-btn-next:hover
+  {
+      background-color: {{ section.settings.slider_arrows_background_color_hover }};
   }
 
   #shopify-section-{{ section.id }} .s-slider-pin-points__click-item{
@@ -26,21 +35,29 @@
 
   }
 
-  #shopify-section-{{ section.id }} .s-slider-pin-points__click-item:hover{
+  #shopify-section-{{ section.id }} .s-slider-pin-points__click-item:hover,
+  #shopify-section-{{ section.id }} .s-slider-pin-points__click-item.is-active{
     color: {{ section.settings.click_text_color_hover }};
+  }
+  #shopify-section-{{ section.id }} .s-slider-pin-points__click-item:hover::before{
+    background-color: {{ section.settings.click_text_color_hover }};
     {% if section.settings.click_text_is_underline_hover %}
       opacity: 1;
     {% endif %}
   }
 
-  #shopify-section-{{ section.id }} .s-slider-pin-points__click-item.is-active:before{
-    {% if section.settings.click_text_is_underline_select %}
-      opacity: 1;
-    {% endif %}
-  }
+  {% if section.settings.click_text_is_underline_select %}
+  #shopify-section-{{ section.id }} .s-slider-pin-points__click-item.is-active::before{
+    background-color: {{ section.settings.click_text_color_hover }};
+    opacity: 1;
+    }
+  {% endif %}
 
   #shopify-section-{{ section.id }} .s-slider-pin-points__inner-container{
-      background-color: {{ section.settings.background_color }};
+      background-color: {{ section.settings.slider_background_color }};
+      grid-template-areas:
+       "slider"
+       "text";
   }
 
   #shopify-section-{{ section.id }} .s-slider-pin-points__title{
@@ -72,9 +89,9 @@
     }
     #shopify-section-{{ section.id }} .s-slider-pin-points__inner-container{
     {% if section.settings.slider_reverse_content %}
-      grid-template-areas: "slider text";
-    {% else %}
       grid-template-areas: "text slider";
+      {% else %}
+      grid-template-areas: "slider text";
     {% endif %}
     }
   }
@@ -90,22 +107,41 @@
   {% endif %}
   {% if section.blocks.size > 0 %}
     <div class="s-slider-pin-points__inner-container">
+      <div class="s-slider-pin-points__slider-btns s-slider-pin-points__slider-btns--desktop">
+        <button class="s-slider-pin-points__slider-btn-prev js-slider-pin-points__slider-btn-prev" type="button">
+          {% render 'icon-arrow-left' %}
+        </button>
+        <button class="s-slider-pin-points__slider-btn-next js-slider-pin-points__slider-btn-next" type="button">
+          {% render 'icon-arrow-right' %}
+        </button>
+      </div>
+
       <swiper-container
-        class="s-slider-pin-points__slider"
-        {% comment %}
-          add loop and autoplay settings
-        {% endcomment %}
+        class="s-slider-pin-points__slider js-slider-pin-points__slider"
+        init="false"
+        {% if section.settings.slider_autoplay_enabled %}
+          data-autoplay
+        {% endif %}
+        {% if section.settings.slider_loop_enabled %}
+          data-loop
+        {% endif %}
       >
-        <div slot="container-start">
-          <button class="s-slider-pin-points__slider-btn-prev js-slider-pin-points__slider-btn-prev">
+        <div
+          slot="container-start"
+          class="s-slider-pin-points__slider-btns s-slider-pin-points__slider-btns--mobile"
+        >
+          <button class="s-slider-pin-points__slider-btn-prev js-slider-pin-points__slider-btn-prev" type="button">
             {% render 'icon-arrow-left' %}
           </button>
-          <button class="s-slider-pin-points__slider-btn-next js-slider-pin-points__slider-btn-next">
+          <button class="s-slider-pin-points__slider-btn-next js-slider-pin-points__slider-btn-next" type="button">
             {% render 'icon-arrow-right' %}
           </button>
         </div>
         {% for block in section.blocks %}
-          <swiper-slide class="s-slider-pin-points__slide-item s-slider-pin-points__slide-item--{{ block.id }}">
+          <swiper-slide
+            class="s-slider-pin-points__slide-item js-slider-pin-points__slide-item s-slider-pin-points__slide-item--{{ block.id }}"
+            data-index="{{ forloop.index0 }}"
+          >
             {% style %}
               .s-slider-pin-points__slide-item--{{ block.id }}  .s-slider-pin-points__point-container{
                 top: {{ block.settings.pin_position_y_mobile }}%;
@@ -160,7 +196,11 @@
       </swiper-container>
       <div class="s-slider-pin-points__clicks-container">
         {% for block in section.blocks %}
-          <button class="s-slider-pin-points__click-item">
+          <button
+            class="s-slider-pin-points__click-item js-slider-pin-points__click-item {% if forloop.first %} is-active {% endif %}"
+            type="button"
+            data-index="{{ forloop.index0 }}"
+          >
             {{ block.settings.title }}
           </button>
         {% endfor %}
@@ -311,6 +351,18 @@
     {
       "type": "checkbox",
       "default": false,
+      "label": "Enable Autoplay",
+      "id": "slider_autoplay_enabled"
+    },
+    {
+      "type": "checkbox",
+      "default": true,
+      "label": "Enable Loop",
+      "id": "slider_loop_enabled"
+    },
+    {
+      "type": "checkbox",
+      "default": false,
       "id": "slider_reverse_content",
       "label": "Enable Reverse Content For Desktop Slider"
     },
@@ -325,6 +377,12 @@
       "default": "#0E0C0C",
       "label": "Arrows Background Color",
       "id": "slider_arrows_background_color"
+    },
+    {
+      "type": "color",
+      "default": "#0E0C0C",
+      "label": "Arrows Background Color Hover",
+      "id": "slider_arrows_background_color_hover"
     },
     {
       "type": "header",
