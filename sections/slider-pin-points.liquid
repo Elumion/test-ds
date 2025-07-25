@@ -105,7 +105,38 @@
           </button>
         </div>
         {% for block in section.blocks %}
-          <swiper-slide class="s-slider-pin-points__slide-item">
+          <swiper-slide class="s-slider-pin-points__slide-item s-slider-pin-points__slide-item--{{ block.id }}">
+            {% style %}
+              .s-slider-pin-points__slide-item--{{ block.id }}  .s-slider-pin-points__point-container{
+                top: {{ block.settings.pin_position_y_mobile }}%;
+                left: {{ block.settings.pin_position_x_mobile }}%;
+              }
+              .s-slider-pin-points__slide-item--{{ block.id }}  .s-slider-pin-points__point-dot{
+                background-color: {{ block.settings.pin_dot_color }};
+              }
+              .s-slider-pin-points__slide-item--{{ block.id }}  .s-slider-pin-points__point-text{
+                color: {{ block.settings.pin_text_color }};
+                font-weight: {{ block.settings.pin_text_font_weight_mobile }};
+                font-size: {{ block.settings.pin_text_font_size_mobile }}px;
+                {% if block.settings.pin_text_is_uppercase %}
+                  text-transform: uppercase;
+                {% endif %}
+                {% if block.settings.pin_text_is_italic %}
+                  font-style: italic;
+                {% endif %}
+              }
+
+              @media screen and (min-width:768px){
+                .s-slider-pin-points__slide-item--{{ block.id }}  .s-slider-pin-points__point-container{
+                top: {{ block.settings.pin_position_y_desktop }}%;
+                left: {{ block.settings.pin_position_x_desktop }}%;
+                }
+                .s-slider-pin-points__slide-item--{{ block.id }}  .s-slider-pin-points__point-text{
+                  font-size: {{ block.settings.pin_text_font_size_desktop }}px;
+                  font-weight: {{ block.settings.pin_text_font_weight_desktop }};
+                }
+              }
+            {% endstyle %}
             {% if block.settings.image_desktop != blank %}
               {% render 'image',
                 image: block.settings.image_desktop,
