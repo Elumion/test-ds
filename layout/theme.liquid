@@ -255,6 +255,8 @@
       }
     {% endstyle %}
 
+    {% render 'css-variables' %}
+
     {{ 'base.css' | asset_url | stylesheet_tag }}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
@@ -296,6 +298,8 @@
         document.documentElement.classList.add('shopify-design-mode');
       }
     </script>
+    <script src="{{ "lazysizes.min.js" |  asset_url }}" async=""></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js" defer></script>
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
